@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Sticker</title>
+    <script type="text/javascript" src="./scripts/jscolor/jscolor.js"></script>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+    <script type='text/javascript' src='./scripts/jquery.blockUI.js'></script>
+    <script type='text/javascript' src='./scripts/fabric.js-1.4.13/dist/fabric.min.js'></script>
+    <script type='text/javascript' src='./scripts/sticker.js'></script>
+    <script type="text/javascript">
+        fabric = (function (f) { var nativeOn = f.on; var dblClickSubscribers = []; var nativeCanvas = f.Canvas; f.Canvas = (function (domId, options) { var canvasDomElement = document.getElementById(domId); var c = new nativeCanvas(domId, options); c.dblclick = function (handler) { dblClickSubscribers.push(handler) }; canvasDomElement.nextSibling.ondblclick = function (ev) { for (var i = 0; i < dblClickSubscribers.length; i++) { console.log(ev); dblClickSubscribers[i]({ e: ev }); } }; return c; }); return f; } (fabric)); 
+    </script>
+    <style type='text/css'>
+        canvas
+        {
+            border-width: 1px;
+            border-style: solid;
+            border-color: #000;
+        }
+    </style>
+</head>
+<body>
+    <button id="insertTextBtn">
+        新增文字方塊</button>
+    <button id="insertImage">
+        新增圖片</button>
+    <button id="insertCircle">
+        新增圓形</button>
+    <button id="group">
+        群組</button>
+    <button id="ungroup">
+        取消群組</button>
+    <canvas id="c" width="1000" height="800">
+    </canvas>
+    <button id="sendToBack">
+        至底</button>
+    <button id="sendBackwards">
+        下移圖層</button>
+    <button id="bringForward">
+        上移圖層</button>
+    <button id="bringToFront">
+        至上</button>
+    <div id="editTextForm" style="display: none">
+        <p>
+            <label>
+                請輸入字串:</label><input id="editTextString" type="text" name="editTextString" />
+        </p>
+        <p>
+            <button id="editTextOK">
+                確定</button>
+            <button id="editTextCancel">
+                取消</button>
+        </p>
+    </div>
+    <div id="insertImageForm" style="display: none">
+        <p>
+            <label>
+                請選擇檔案:</label>
+            <input id="imageInput" type="file">
+        </p>
+    </div>
+    <div id="insertCircleForm" style="display: none">
+        <p>
+            <label>
+                請選擇顏色:</label>
+            <input id="colorCode" value="FF0000" class="color {pickerClosable:true}" onmousemove="document.getElementById('colorCode').color.showPicker()">
+            <button id="inertCircleOK" onmousemove="document.getElementById('colorCode').color.hidePicker()">
+                確定</button>
+            <button id="inertCircleCancel" onmousemove="document.getElementById('colorCode').color.hidePicker()">
+                取消</button>
+        </p>
+    </div>
+</body>
+</html>
